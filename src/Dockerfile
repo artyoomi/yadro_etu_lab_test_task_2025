@@ -2,7 +2,7 @@
 FROM gcc:11.3.0
 
 # Set working directory
-WORKDIR /app
+WORKDIR /shm_app
 
 # Copy necessary files in container
 COPY macro.h .
@@ -17,4 +17,5 @@ RUN gcc -o shm_reader shm_reader.c
 # Make start.sh executable
 RUN chmod +x start_programs.sh
 
+# Execute programs 
 CMD ["./start_programs.sh"]

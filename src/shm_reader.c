@@ -27,7 +27,7 @@ int main()
         scanf("%d", &shm_key);
         
         // Create shared memory segment
-        if ((shmid = shmget(shm_key, REGION_SIZE, 0666)) == -1) {
+        if ((shmid = shmget(shm_key, REGION_SIZE, 0600)) == -1) {
                 PRINT_ERRMSG("shmget");
                 exit(EXIT_FAILURE);
         }

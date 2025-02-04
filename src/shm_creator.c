@@ -32,7 +32,7 @@ int main()
         }
 
         // Create shared memory segment
-        if ((shmid = shmget(shm_key, REGION_SIZE, IPC_CREAT | 0644)) == -1) {
+        if ((shmid = shmget(shm_key, REGION_SIZE, IPC_CREAT | 0600)) == -1) {
                 PRINT_ERRMSG("shmget");
                 exit(EXIT_FAILURE);
         }
