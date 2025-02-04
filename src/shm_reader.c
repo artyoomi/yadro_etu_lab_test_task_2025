@@ -33,7 +33,7 @@ int main()
         }
 
         // Attach segm_seq to shared memory segment
-        if ((segm_seq = (char*)shmat(shmid, NULL, 0)) == (void*) -1) {
+        if ((segm_seq = (char*)shmat(shmid, NULL, SHM_RDONLY)) == (void*) -1) {
                 PRINT_ERRMSG("shmat");
                 exit(EXIT_FAILURE);
         }
