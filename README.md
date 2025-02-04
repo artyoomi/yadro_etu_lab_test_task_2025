@@ -3,6 +3,16 @@
 ### Description
 Test task in Yadro lab in ETU "LETI", 2025.
 
+### Dependencies
+To run program you must have [Docker](https://docs.docker.com/engine/install/ubuntu/) installed.
+
+### Run
+To execute programs in Docker container use
+```
+chmod +x start_docker.sh
+./start_socker.sh
+```
+
 ### Task
 
 **Необходимо создать 2 программы на языке C/C++:**
