@@ -14,18 +14,10 @@
 #include <sys/ipc.h>
 #include <sys/shm.h>
 
-// Size in bytes of shared memory region
-#define REGION_SIZE 1000
+#include "macro.h"
 
 // String to output in shared memory segment
 #define OUTPUT_STR  "Hello world!"
-
-/*
- * Macro function to automate error msg printing
- * Requires included: stdio.h, errno,h, string.h
- */
-#define PRINT_ERRMSG(func_name) \
-        fprintf(stderr, "%d: %s: %s\n", errno, (func_name), (strerror(errno)))
 
 int main()
 {
@@ -34,13 +26,13 @@ int main()
         char* segm_seq;
         
         // Generate shared memory key
-        if ((shm_key = ftok("Dockerfile", 'x')) == -1) {
+        if ((shm_key = ftok("macro.h", 'x')) == -1) {
                 PRINT_ERRMSG("ftok");
                 exit(EXIT_FAILURE);
         }
 
         // Create shared memory segment
-        if ((shmid = shmget(shm_key, REGION_SIZE, IPC_CREAT | IPC_EXCL | 0600)) == -1) {
+        if ((shmid = shmget(shm_key, REGION_SIZE, IPC_CREAT | 0644)) == -1) {
                 PRINT_ERRMSG("shmget");
                 exit(EXIT_FAILURE);
         }
@@ -56,12 +48,12 @@ int main()
 
         // Detach from shared memory region
         if (shmdt(segm_seq) == -1) {
-                PRINT_ERRMSG("shmat");
+                PRINT_ERRMSG("shmdt");
                 exit(EXIT_FAILURE);
         }
 
         // Write shared memory region key to stdout
-        printf("%d", shm_key);
+        printf("%d\n", shm_key);
         
         return 0;
 }
