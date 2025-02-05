@@ -16,14 +16,14 @@ chmod +x start_docker.sh
 
 ### Task
 
-**Необходимо создать 2 программы на языке C/C++:**
-- Первая программа должна создать регион разделяемой памяти (shared memory) размером в 1000 байт, записать туда строку “Hello world!” и
-вывести в стандартный поток вывода ключ разделяемой памяти. В случае ошибки программа должна вывести код ошибки и расшифровку кода ошибки.
-- Вторая программа должна считать ключ разделяемой памяти из вывода первой программы, прочитать содержимое участка памяти и вывести его в
-стандартный поток вывода в виде строки. В случае ошибки программа должна вывести код ошибки и расшифровку кода ошибки.
-Перед завершением программа должна удалить указанный участок разделяемой памяти для всех процессов.
+**It is necessary to create 2 programs in the C/C++ language:**
+- The first program should create a 1000 byte shared memory region and write the string “Hello world!” and
+output the shared memory key to the standard output stream. In case of an error, the program should output the error code and the decoding of the error code;
+- The second program should read the shared memory key from the output of the first program, read the contents of the memory section and output it to the
+standard output stream as a string. In case of an error, the program should output the error code and the decoding of the error code.
+Before terminating, the program must delete the specified portion of shared memory for all processes.
  
-**Требования к выполнению задания:**
-- Программы должны запускаться внутри Docker-контейнера. В качестве базового docker образа необходимо использовать официальный образ gcc: gcc:11.3.0
-- Необходимо создать свой репозиторий для данного задания. Репозиторий должен содержать файлы исходного кода, dockerfile, скрипты для сборки и запуска задания и инструкцию для запуска и сборки
-- Программы не должны использовать сторонние библиотеки для межпроцессного взаимодействия, которые используют механизм разделяемой памяти (необходимо использовать функции стандартной библиотеки)
+**Requirements for completing the task:**
+- Programs must be run inside a Docker container. The official gcc image must be used as the base docker image: gcc:11.3.0;
+- You need to create your own repository for this task. The repository should contain the source code files, dockerfile, scripts for building and running the job, and instructions for starting and building;
+- Programs should not use third-party libraries for interprocess communication that use a shared memory mechanism (standard library functions must be used).
