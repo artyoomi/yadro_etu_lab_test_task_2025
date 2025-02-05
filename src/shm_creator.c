@@ -26,7 +26,7 @@ int main()
         char* segm_seq;
         
         // Generate shared memory key
-        if ((shm_key = ftok("macro.h", 'x')) == -1) {
+        if ((shm_key = ftok("/dev", 'x')) == -1) {
                 PRINT_ERRMSG("ftok");
                 exit(EXIT_FAILURE);
         }

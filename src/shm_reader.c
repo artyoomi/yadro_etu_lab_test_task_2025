@@ -24,7 +24,10 @@ int main()
         char  recieved_data[REGION_SIZE];
 
         // Get data from stdout of first program
-        scanf("%d", &shm_key);
+        if (scanf("%d", &shm_key) != 1) {
+                PRINT_ERRMSG("scanf");
+                exit(EXIT_FAILURE);
+        }
         
         // Create shared memory segment
         if ((shmid = shmget(shm_key, REGION_SIZE, 0600)) == -1) {
@@ -43,7 +46,7 @@ int main()
 
         // Detach from shared memory region
         if (shmdt(segm_seq) == -1) {
-                PRINT_ERRMSG("shmat");
+                PRINT_ERRMSG("shmdt");
                 exit(EXIT_FAILURE);
         }
 
