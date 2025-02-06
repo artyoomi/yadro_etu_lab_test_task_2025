@@ -11,8 +11,7 @@ COPY src ${APP_DIR}/src
 COPY Makefile start_programs.sh ${APP_DIR}/
 
 # Compile programs & make start_programs.sh executable
-RUN make && \
-    chmod +x start_programs.sh
+RUN make
 
 # Execute programs 
 CMD ["./start_programs.sh"]

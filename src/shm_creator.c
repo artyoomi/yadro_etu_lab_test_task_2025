@@ -27,19 +27,20 @@ int main()
         
         // Generate shared memory key
         if ((shm_key = ftok("/dev", 'x')) == -1) {
-                PRINT_ERRMSG("ftok");
+                PRINT_ERRNO_MSG("ftok");
                 exit(EXIT_FAILURE);
         }
 
         // Create shared memory segment
         if ((shmid = shmget(shm_key, REGION_SIZE, IPC_CREAT | 0600)) == -1) {
-                PRINT_ERRMSG("shmget");
+                PRINT_ERRNO_MSG("shmget");
                 exit(EXIT_FAILURE);
         }
 
         // Attach segm_seq to shared memory segment
         if ((segm_seq = (char*)shmat(shmid, NULL, 0)) == (void*) -1) {
-                PRINT_ERRMSG("shmat");
+                PRINT_ERRNO_MSG("shmat");
+                shmctl(shmid, IPC_RMID, NULL);
                 exit(EXIT_FAILURE);
         }
 
@@ -48,7 +49,8 @@ int main()
 
         // Detach from shared memory region
         if (shmdt(segm_seq) == -1) {
-                PRINT_ERRMSG("shmdt");
+                PRINT_ERRNO_MSG("shmdt");
+                shmctl(shmid, IPC_RMID, NULL);
                 exit(EXIT_FAILURE);
         }
 

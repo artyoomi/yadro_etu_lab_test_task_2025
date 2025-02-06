@@ -23,21 +23,23 @@ int main()
         char* segm_seq;
         char  recieved_data[REGION_SIZE];
 
+        int ret = 0;
         // Get data from stdout of first program
-        if (scanf("%d", &shm_key) != 1) {
-                PRINT_ERRMSG("scanf");
+        if ((ret = scanf("%d", &shm_key)) != 1) {
+                PRINT_ERRMSG("scanf", ret, "Not enough values in input");
                 exit(EXIT_FAILURE);
         }
         
-        // Create shared memory segment
+        // Get shared memory segment id
         if ((shmid = shmget(shm_key, REGION_SIZE, 0600)) == -1) {
-                PRINT_ERRMSG("shmget");
+                PRINT_ERRNO_MSG("shmget");
                 exit(EXIT_FAILURE);
         }
 
         // Attach segm_seq to shared memory segment
         if ((segm_seq = (char*)shmat(shmid, NULL, SHM_RDONLY)) == (void*) -1) {
-                PRINT_ERRMSG("shmat");
+                PRINT_ERRNO_MSG("shmat");
+                shmctl(shmid, IPC_RMID, NULL);
                 exit(EXIT_FAILURE);
         }
 
@@ -46,13 +48,14 @@ int main()
 
         // Detach from shared memory region
         if (shmdt(segm_seq) == -1) {
-                PRINT_ERRMSG("shmdt");
+                PRINT_ERRNO_MSG("shmdt");
+                shmctl(shmid, IPC_RMID, NULL);
                 exit(EXIT_FAILURE);
         }
 
         // Delete shared memory region
         if (shmctl(shmid, IPC_RMID, NULL) == -1) {
-                PRINT_ERRMSG("shmctl");
+                PRINT_ERRNO_MSG("shmctl");
                 exit(EXIT_FAILURE);
         }
 

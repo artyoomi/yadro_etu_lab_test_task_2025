@@ -9,7 +9,6 @@ To run program you must have [Docker](https://docs.docker.com/engine/install/ubu
 ### Run
 To execute programs in Docker container use
 ```
-chmod +x start_docker.sh
 ./start_docker.sh          # may require sudo
 ```
 
