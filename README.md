@@ -2,6 +2,7 @@
 
 ### Description
 Test task in Yadro lab in ETU "LETI", 2025.
+*(DENIED: b49685c2d33a03a6aa8db947e7b3a5d2767e1c22)*
 
 ### Dependencies
 To run program you must have [Docker](https://docs.docker.com/engine/install/ubuntu/) installed.

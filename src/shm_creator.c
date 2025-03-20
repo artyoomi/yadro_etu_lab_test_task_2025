@@ -26,7 +26,7 @@ int main()
         char* segm_seq;
         
         // Generate shared memory key
-        if ((shm_key = ftok("/dev", 'x')) == -1) {
+        if ((shm_key = ftok("./shm_reader", 'x')) == -1) {
                 PRINT_ERRNO_MSG("ftok");
                 exit(EXIT_FAILURE);
         }
