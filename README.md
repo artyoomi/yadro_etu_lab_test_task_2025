@@ -9,7 +9,8 @@ To run program you must have [Docker](https://docs.docker.com/engine/install/ubu
 ### Run
 To execute programs in Docker container use
 ```
-./start_docker.sh          # may require sudo
+docker build -t shm_app .
+docker run --rm -it shm_app
 ```
 
 

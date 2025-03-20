@@ -1,14 +1,11 @@
-# Base image
-FROM gcc:11.3.0
+# Stage 1: build
+FROM gcc:11.3.0 AS builder
+WORKDIR /app
+COPY . .
+RUN make > /dev/null
 
-ARG APP_DIR=/shm_app
-
-# Set working directory
-WORKDIR ${APP_DIR}
-
-# Copy necessary files in container
-COPY src ${APP_DIR}/src
-COPY Makefile start_programs.sh ${APP_DIR}/
-
-# Compile and execute programs 
-CMD ["./start_programs.sh"]
+# Stage 2: run
+FROM alpine:3.17
+WORKDIR /app
+COPY --from=builder /app/build/shm_creator /app/build/shm_reader .
+CMD [ "sh", "-c", "./shm_creator | ./shm_reader" ]

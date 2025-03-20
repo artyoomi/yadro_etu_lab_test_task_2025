@@ -1,5 +1,6 @@
-CC     := gcc
-CFLAGS := -Wall -Wextra -Werror
+CC      := gcc
+CFLAGS  := -Wall -Wextra -Werror
+LDFLAGS := -static
 
 SRCDIR   := src
 BUILDDIR := build
@@ -12,10 +13,10 @@ TARGET2 := ${BUILDDIR}/shm_reader
 all: ${BUILDDIR} ${TARGET1} ${TARGET2}
 
 ${TARGET1}: ${SRCDIR}/macro.h ${SRCDIR}/shm_creator.c
-	${CC} ${CFLAGS} -o $@ $^
+	${CC} ${CFLAGS} -o $@ $^ ${LDFLAGS}
 
 ${TARGET2}: ${SRCDIR}/macro.h ${SRCDIR}/shm_reader.c
-	${CC} ${CFLAGS} -o $@ $^
+	${CC} ${CFLAGS} -o $@ $^ ${LDFLAGS}
 
 ${BUILDDIR}:
 	mkdir -p ${BUILDDIR}
